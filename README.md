@@ -1,7 +1,3 @@
-# RMD4HS
-RMarkdown (and blogdown > GitHub Pages) for Health Scientists
-
-
 start with downloading the whole repo with the green `code` button
 
 we'll use the `example/` directory today
