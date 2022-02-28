@@ -1,0 +1,66 @@
+---
+title: "01 Lung Data Report"
+author: "Heidi Steiner"
+date: "2/21/2022"
+output: html_document 
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+library(tidyverse)
+library(survival)
+
+ggplot2::theme_set(ggplot2::theme_minimal())
+```
+
+## Lung Data 
+
+The lung data set is found in the [`survival`](https://github.com/therneau/survival) R package. Try to load the lung data set in R by issuing the following command at the console `lung`. See the **data dictionary** below: 
+
+
+|col_name|key|
+|:-------|:--|
+|inst|Institution code|
+|status|	censoring status 1=censored, 2=dead|
+|age|	Age in years|
+|sex|	Male=1 Female=2|
+|time|	Survival time in days|
+|ph.ecog|	ECOG performance score (0=good 5=dead)|
+|ph.karno|	Karnofsky performance score (bad=0-good=100) rated by physician|
+|pat.karno|	Karnofsky performance score as rated by patient|
+|meal.cal|	Calories consumed at meals|
+|wt.loss|	Weight loss in last six months|
+
+```{r echo = FALSE, message=FALSE}
+mockdata = read_csv("2022-01-01_lungdat.csv") %>%  ## read in your data with read_csv
+  mutate_at(.vars = c("inst", "status", "sex", "ph.ecog"),.funs = as.factor) 
+```
+
+## Easy Exploration of Data 
+
+Many packages, such as [`dplyr`](https://dplyr.tidyverse.org/) facilitate the ease of exploring your data.
+
+```{r comment = ""}
+mockdata %>% 
+  glimpse()
+```
+
+
+## Communicate Results Reproducibly
+
+RMarkdown allows you to visualize your data within a document that also contains text. 
+
+```{r warning = F}
+mockdata %>% 
+  ggplot(aes(time, wt.loss, color = inst)) + 
+  geom_point()
+```
+
+RMD can be used to create data driven reports for your collaborators or even to write entire manuscripts! 
+
+
+
+

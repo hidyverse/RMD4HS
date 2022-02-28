@@ -1,0 +1,233 @@
+---
+title: "02 Lung Data Report"
+author: "Heidi Steiner"
+date: "2/22/2022"
+output:
+  html_document: 
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(cowplot)
+library(janitor) # need to install 
+library(kableExtra)
+library(knitr)
+library(skimr)
+library(survival)
+library(survminer) # need to install
+library(tidyverse)
+
+ggplot2::theme_set(ggplot2::theme_minimal())
+
+```
+
+
+```{r echo = FALSE, message=FALSE}
+mockdata = read_csv("2022-02-22_lungdat.csv") %>% 
+  mutate_at(.vars = c("inst", "status", "sex", "ph.ecog", "ph.karno", "pat.karno"),.funs = as.factor)
+```
+
+## Data Summaries 
+
+Easily print summary tables of your data with [`skimr`](https://docs.ropensci.org/skimr/)
+
+```{r}
+mockdata %>%  
+  skim()
+```
+
+
+but this is not super reader friendly. ...we can improve table output with `kable()` from the [`knitr`](https://yihui.org/knitr/) package and `kable_styling()` from the [`kableExtra`](https://haozhu233.github.io/kableExtra/) package. 
+
+I used the option `font_size = 9` to reduce the size of the text as well 
+
+
+```{r}
+mockdata %>% 
+  skim() %>% 
+  knitr::kable() %>% 
+  kable_styling(font_size = 9)
+```
+
+
+If you're like me and the NAs in this output are a deal breaker, try splitting the factor variables from the numeric variables so there are fewer columns to report! 
+
+The `.$factor` function will filter just the factor variables from the skim list.
+
+```{r warning=FALSE}
+mockdata  %>% 
+  skim_to_list() %>% 
+  .$factor %>% 
+  knitr::kable( caption = 'Factor Variables') %>% 
+  kable_styling( font_size = 9)
+```
+
+and `.$numeric` function will filter just the numeric variables from the skim list.
+
+
+```{r warning=FALSE}
+mockdata  %>% 
+  skim_to_list() %>% 
+  .$numeric %>% 
+  knitr::kable( caption = 'Numeric Variables') %>% 
+  kable_styling( font_size = 9)
+```
+
+## Tables 
+
+We also often want to create basic (or not so basic) tables of results for our reports. Create quick frequency tables with [`janitor`](https://garthtarr.github.io/meatR/janitor.html)
+
+
+```{r comment=""}
+mockdata %>% 
+  tabyl(ph.ecog)
+```
+
+`janitor` also has a mechanism to add frequency percentages and row totals to your tables 
+
+```{r comment=""}
+mockdata %>% 
+  tabyl(ph.ecog) %>% 
+  adorn_totals("row") %>%
+  adorn_pct_formatting()
+```
+
+and then you can add `kable()` and `kable_styling()` again to make it print how you need 
+
+```{r results='asis'}
+mockdata %>% 
+  tabyl(ph.ecog, sex) %>%
+  knitr::kable(caption = 'ECOG performance score (0=good 5=dead) by Sex (Male=1 Female=2)',
+               table.attr = "style='width:30%;'") %>% 
+  kable_styling()
+```
+
+## Figures 
+
+Often, you want to include results in the form of figures in your reports. [`ggplot2`](https://ggplot2.tidyverse.org/) makes plotting formulaic. 
+
+**Hint** I removed observations with ECOG scores of 3 based on the last table. 
+
+```{r message=FALSE}
+p1 = mockdata %>% 
+  filter(ph.ecog != "3") %>% 
+  ggplot(aes(x = age, y = time, fill = ph.ecog, color = ph.ecog)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  labs(title = "Survival Time by Age of patient within \nECOG performance score groups",
+       x = "Age (yrs)",
+       y = "Survival Time (days)",
+       fill = "ECOG Score \n(0=Good, 2=Less Good)",
+       color = "ECOG Score \n(0=Good, 2=Less Good)")
+p1 
+```
+
+`ggplot2` is super dynamic and includes many ways to visualize your data
+
+```{r}
+p2 = mockdata %>% 
+  filter(ph.ecog != "3",
+         !is.na(ph.karno)) %>% 
+  ggplot(aes(x = ph.karno, y = time)) +
+  geom_violin(aes(fill = ph.karno,
+                  color = ph.karno),
+              alpha = .2) +
+  geom_boxplot(aes(color = ph.karno),
+               outlier.shape = NA,
+               width = .1,
+               alpha = .5,
+               show.legend = F) +
+  labs(fill = "0 = Bad\n100 = Good",
+       color = "0 = Bad\n100 = Good",
+       title = "Karnofsky Performance Score \nrated by Physician",
+       x = "Performance Score",
+       y = "Time (days)"
+       )
+
+p2
+```
+
+Or, perhaps you need to include a more domain specific plot. Google for your analysis and R (or tidyverse) and see if this already exists! 
+
+Here, I demonstrate visualizing a survival analysis with the `survival` and [`survminer`](https://rpkgs.datanovia.com/survminer/index.html) packages. 
+
+```{r survminer, fig.height=6}
+p3 = ggsurvplot(
+    fit = survfit(Surv(time, status) ~ ph.ecog, data = lung %>% filter(ph.ecog != "3")), 
+    xlab = "Days", 
+    ylab = "Overall survival probability",
+    legend.lab = c("0 - Good", "1 - ", "2 - Less Good"),
+    legend.title = "ECOG performance score",
+    risk.table = T)
+p3
+```
+Sometimes, you'll want to combine multiple plots of different types such as the ones we've just created. [`cowplot`](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html) (and `patchwork`) lets us combine multiple plots in a grid. 
+
+First, I align the top plots and then added the survival curve to the grid! 
+
+```{r fig.height=6, fig.width=8, message=FALSE}
+cow1 = plot_grid(p1, p2,
+          labels = c('A', 'B'), 
+          label_size = 12,
+          ncol = 2)
+
+plot_grid(cow1, p3$plot, 
+          label_size = 12,
+          labels = c('', "C"),
+          ncol = 1)
+```
+
+
+## Your Turn
+
+#### 1. 
+
+Make this table print nicely when knitted
+
+```{r results='asis'}
+mockdata %>% 
+  tabyl(ph.ecog, sex) %>% 
+  adorn_totals("row") %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 2) %>%
+  adorn_ns() 
+```
+
+#### 2. 
+
+Add variables to this typical [table one](https://thomaselove.github.io/432-notes/building-table-1.html#two-examples-from-the-new-england-journal-of-medicine) created with the [`aresenal`](https://mayoverse.github.io/arsenal/reference/arsenal.html) package
+
+```{r results='asis'}
+library(arsenal)
+
+tableby(ph.ecog ~ sex, data = mockdata) %>% 
+  summary()
+```
+
+
+#### 3. 
+
+Add a `fig.path` in your \ref{setup} chunk and `knit` again !
+
+
+#### 4. 
+
+Add a histogram of the ages of the study participants in the plot grid for your report!
+
+First, create, and save a histogram **HINT** check out the [`ggplot2` cheat sheet](https://www.rstudio.com/resources/cheatsheets/)
+
+```{r}
+
+```
+
+Then, add your plot to this grid copied from above. 
+
+```{r}
+plot_grid(cow1, p3$plot, 
+          label_size = 12,
+          labels = c('', "C"),
+          ncol = 1)
+```
+
