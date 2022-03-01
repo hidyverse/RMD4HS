@@ -5,6 +5,10 @@ date: "2/21/2022"
 output:
   html_document:
     toc: true
+    toc_float: true
+    theme: flatly
+    df_print: kable
+    code_download: true
 ---
 
 
@@ -37,7 +41,7 @@ The lung data set is found in the [`survival`](https://github.com/therneau/survi
 |wt.loss|	Weight loss in last six months|
 
 ```{r echo = FALSE, message=FALSE}
-mockdata = read_csv("2022-01-01_lungdat.csv") %>%  ## read in your data with read_csv
+mockdata = read_csv("2022-02-22_lungdat.csv") %>%  ## read in your data with read_csv
   mutate_at(.vars = c("inst", "status", "sex", "ph.ecog"),.funs = as.factor) 
 ```
 
@@ -66,7 +70,6 @@ mockdata %>%
 ```
 
 
-
 ## Summary
 
 - RMD can be used to create data driven reports for your collaborators or even to write entire manuscripts! 
@@ -76,5 +79,6 @@ mockdata %>%
   1. code   
   1. output
 - RMD is wizardry! 
+
 
 

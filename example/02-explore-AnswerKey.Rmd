@@ -12,7 +12,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.path = "plots/")
 
 library(cowplot)
 library(janitor) # need to install 
@@ -177,9 +177,6 @@ cow1 = plot_grid(p1, p2,
           label_size = 12,
           ncol = 2)
 
-cow2 = plot_grid(p1, p2, p3$plot,
-         # labels = c('A', 'B'), 
-          label_size = 12)
 
 plot_grid(cow1, p3$plot, 
           label_size = 12,
@@ -187,6 +184,11 @@ plot_grid(cow1, p3$plot,
           ncol = 1)
 ```
 
+But, had I not aligned in two steps, the cowplot grid would have looked like 
+
+```{r}
+cow2 = plot_grid(p1, p2, p3$plot)
+```
 
 
 ## Your Turn 
@@ -205,25 +207,33 @@ mockdata %>%
   adorn_totals("row") %>%
   adorn_percentages("row") %>%
   adorn_pct_formatting(digits = 2) %>%
-  adorn_ns() 
+  adorn_ns() %>%
+  knitr::kable(caption = 'ECOG performance score by Sex',
+               table.attr = "style='width:50%;'") %>% 
+  kable_styling()
 ```
 
 #### 2. 
 
 Add variables to this typical [table one](https://thomaselove.github.io/432-notes/building-table-1.html#two-examples-from-the-new-england-journal-of-medicine) created with the [`aresenal`](https://mayoverse.github.io/arsenal/reference/arsenal.html) package
 
-```{r results='asis'}
+**CHALLENGE**: Style this table for your report
+
+```{r}
 library(arsenal)
 
-tableby(ph.ecog ~ sex, data = mockdata) %>% 
+tableby(ph.ecog ~ sex + age + ph.karno, data = mockdata) %>% 
   summary()
 ```
 
 
-
 #### 3. 
 
-Add a `fig.path` in your steup chunk and `knit` again !
+Add a `fig.path` in your knitr opts in the setup chunk and `knit` again !
+
+**HINT**: https://stackoverflow.com/questions/58598873/r-notebook-markdown-does-not-save-chunk-plots-using-fig-path-chunk-option 
+
+What happened in your environment? 
 
 #### 4. 
 
@@ -232,15 +242,24 @@ Add a histogram of the ages of the study participants in the plot grid for your 
 First, create, and save a histogram **HINT** check out the [`ggplot2` cheat sheet](https://www.rstudio.com/resources/cheatsheets/)
 
 ```{r}
-
+p4 = mockdata %>% 
+  ggplot() + 
+  geom_histogram(aes(x = age))
 ```
 
 Then, add your plot to this grid copied from above. 
 
-```{r}
+```{r eval = F}
 plot_grid(cow1, p3$plot, 
           label_size = 12,
           labels = c('', "C"),
           ncol = 1)
 ```
 
+```{r eval = F}
+cow2 = plot_grid(p3$plot, p4)
+
+plot_grid(cow1, cow2, 
+          label_size = 12,
+          labels = c('A', "B"))
+```
