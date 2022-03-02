@@ -21,7 +21,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300)
+  comment = NA, dpi = 100)
 library(magick)
 library(tidyverse)
 library(countdown)
@@ -105,13 +105,13 @@ class: inverse, middle, center
 class: inverse
 # Step 1 
 
-- Fork 
-
-```{r eval=F}
-https://github.com/hidyverse/RMD4HS 
-```
+- Fork `https://github.com/hidyverse/RMD4HS`
 
 - Clone with RStudio `New Project` from version control 
+
+```{r echo = F}
+knitr::include_graphics("images/git-cycle.png")
+```
 
 ---
 class: inverse
@@ -338,7 +338,7 @@ Self learning from a much better teacher than myself: Alison Hill
 https://www.apreshill.com/blog/spoonful-hugo/ 
 
 ```{r echo = F}
-knitr::include_graphics("images/spoonful-hugo.png")
+knitr::include_graphics("images/spoonful-hugo.png",dpi = 200)
 ```
 
 
