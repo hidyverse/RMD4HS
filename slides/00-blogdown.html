@@ -92,7 +92,7 @@ class: inverse, middle, center
 
 
 ---
-class: inverse, middle
+class: inverse
 # Step 1 
 
 Update materials from GitHub repo
@@ -102,7 +102,7 @@ Does not matter how you get there just that you can!
 
 
 ```r
-Repo: https://github.com/hidyverse/RMD4HS 
+https://github.com/hidyverse/RMD4HS 
 ```
 
 
@@ -111,7 +111,7 @@ and restart RStudio!
 
 
 ---
-class: inverse, middle
+class: inverse
 # Step 2 
 
 Create directories within project root 
@@ -123,7 +123,7 @@ dir.create("docs")
 ```
 
 ---
-class: inverse, middle
+class: inverse
 # Step 3
 
 Create `.noyekyll` file within the new `docs/` directory
@@ -159,7 +159,7 @@ Prep GitHub repo for Pages documents
 Optional: Return to your main repo page and add the new url to the `about` section at the right to make your life easier later
 
 ---
-class: inverse, middle
+class: inverse
 # Step 5
 
 Navigate into the `website/` directory
@@ -172,7 +172,7 @@ setwd("website/")
 We will be copying the `website/public/` to `docs/` and pushing `docs/` to GitHub when we're ready.  
 
 ---
-class: inverse, middle
+class: inverse
 # Step 6
 
 Create a blogdown website! 
@@ -198,7 +198,7 @@ to their `config` file prior to viewing a rendered site (**and use the `serve_si
 
 
 ---
-class: inverse, middle
+class: inverse
 # Step 7
 
 Change base url in `config.yaml` to new github pages url 
@@ -206,7 +206,7 @@ Change base url in `config.yaml` to new github pages url
 Paste the url in `config.yaml` as the key to the `baseurl` value
 
 ---
-class: inverse, middle
+class: inverse
 # Step 8
 
 Add `website/` to `.gitignore` 
@@ -214,7 +214,7 @@ Add `website/` to `.gitignore`
 Create (or add to an existing `.gitignore`) in the root project. Include all the website materials in the `.gitignore` for now. We don't need to have our website creation materials be public, just the final posts.
 
 ---
-class: inverse, middle
+class: inverse
 # Step 9
 
 prior to pushing to GitHub you'll need to build your site
@@ -276,7 +276,7 @@ background-size: cover
 
 
 ---
-class: inverse, middle
+class: inverse
 # Step 10
 
 Copy contents of new `public/` folder to `../docs/` 
@@ -291,7 +291,7 @@ cp -r website/public/* docs/
 **NOTE**: I used the terminal for this! 
 
 ---
-class: inverse, middle
+class: inverse
 # Step 11
 
 Push to existing GitHub repo (or some other upload)
@@ -313,7 +313,7 @@ class: inverse, middle, center
 
 # ✨ Quiz! ✨
 
-<div class="countdown" id="timer_621fd7eb" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<div class="countdown" id="timer_621fdb27" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">02</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -328,7 +328,7 @@ class: inverse, middle, center
 
 # ✨ Trick question ✨
 
-<div class="countdown" id="timer_621fd708" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<div class="countdown" id="timer_621fdba5" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">15</span></code>
 </div>
 
