@@ -34,7 +34,6 @@ All content is [RStudio Education](https://github.com/rstudio-education/), CC-BY
 
 
 
-
 ---
 class: inverse, middle, center
 
@@ -83,15 +82,177 @@ background-size: contain
 background-image: url(assets/emi-showcase.gif)
 background-size: cover
 
+---
+General idea:  
 
-##### NEED TO ADD STEPS HERE 
+#### Users already have an existing repo on GitHub and want to add a .RMD hosted Hugo themed website to the directory  
+
+
+---
+### 1. Update code from GitHub
+
+Pull changes, re-download the zip, or create new project on RStudio (or cloud)... does not matter how you get there just that you can! 
+
+---
+### 2. Create `docs/` and `website/` directories within project root 
+
+
+```r
+dir.create("website")
+dir.create("docs")
+```
+
+---
+### 3. Create `.noyekyll` within  `docs/` with `file.create('../docs/.nojekyll')` 
+
+This will stop GitHub from being confused that we're using Hugo 
+
+**HINT**: Use `ls -a docs/` to double check your `.nojekyll` file was made 
+
+---
+### 4. Prep GitHub repo for page documents 
+
+- Go to `Settings` in your github repo 
+- Select `Pages` on the guide on the left of the screen
+- Change `Branch` from none to `main` (or `master`) 
+- Change repo from root to `docs/`
+- Save &amp; Refresh
+- Copy the url made for your repo
+
+---
+### 5. Navigate into the `website/` directory
+
+
+```r
+setwd("website/")
+```
+
+We will be copying the `website/public/` to `docs/` and pushing `docs/` to GitHub when we're ready.  
+
+---
+### 6. Create a blogdown website! 
+
+
+```r
+blogdown::new_site()
+```
+
+---
+### 7. Change base url in `config.yaml` to new github pages url 
+
+Paste the url in `config.yaml` as the key to the `baseurl` value
+
+---
+### 8. Add `website/` to `.gitignore` 
+
+Create (or add to an existing `.gitignore`) in the root project. Include all the website materials in the `.gitignore` for now. We don't need to have our website creation materials be public, just the final posts.
+
+---
+### 9. `blogdown::build_site()` prior to pushing to GitHub
+
+Building the site will create a `public/` directory within `website/` which we want to copy to `root_project/docs/` to push to GitHub. 
+
+---
+### 10. Copy contents of new `public/` folder to `../docs/` 
+
+This is a manual process so I doubt this is the most efficient way, but this works! 
+
+
+
+```bash
+cp -r website/public/* docs/
+```
+**NOTE**: I used the terminal for this! 
+
+---
+### 11. Push to existing GitHub repo (or some other upload)
+
+Does `docs/` show up in your changes? 
+
+**HINT**: If you're on the cloud, you need to first tell Git who you are! Try:
+
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "UserName"
+```
+**NOTE**: I used the terminal for this!   
+
+
+---
+
+# This is a Hugo site
+
+&lt;img src="images/folder-structure.png" width="90%" /&gt;
+
+---
+
+# This is the content folder
+
+.pull-left[
+&lt;img src="images/content-structure.png" width="90%" /&gt;
+]
+
+.pull-right[
+
++ Hugo calls these "sections"
++ Every section has a "page" (usually singular)
+
+]
+
+
+---
+
+# This is the home folder
+
+.pull-left[
+In the academic theme, these are *widgets*:
+
++ Portable! Move the `widget.md` file to any other [page](https://sourcethemes.com/academic/docs/managing-content/#create-a-widget-page)
++ Configurable! Think: Mr. Potato Head
+
+]
+
+.pull-right[
+
+
+
+]
+
+---
+class: inverse, middle, center
+
+# Widgets
+
+![](https://media.giphy.com/media/3orifd2IjZjWVkpC4o/giphy.gif)
+
+---
+class: inverse, middle, center
+
+# Edit your home page
+
+Pick your widgets- I suggest leaving them all in place but setting `active = FALSE` to remove any.
+
+
+If you delete, they are always in: `themes/hugo-academic/exampleSite/content/home`
+
+<div class="countdown" id="timer_621fad15" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+
+Bonus: move a widget to another [page](https://sourcethemes.com/academic/docs/managing-content/#create-a-widget-page). You could, for example, have the `about.md` widget be the **only** active widget on the home page.
+
+# Go Deeper
+
+Read more of the [docs](https://sourcethemes.com/academic/docs/page-builder/#personalizing-widgets) for personalizing widgets.
+
 
 ---
 class: inverse, middle, center
 
 # ✨ Quiz! ✨
 
-<div class="countdown" id="timer_621fa463" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<div class="countdown" id="timer_621faec6" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">02</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -106,11 +267,17 @@ class: inverse, middle, center
 
 # ✨ Trick question ✨
 
-<div class="countdown" id="timer_621fa4c1" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<div class="countdown" id="timer_621fab66" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">15</span></code>
 </div>
 
 Should you ever edit files in the `public/` directory?
+
+---
+### Extra Time. Download new theme and update as desired! 
+
+[A complete list of Hugo themes](https://themes.gohugo.io/)  
+[More common (aka more likely to work) Hugo themes via Wowchemy](https://wowchemy.com/hugo-themes/)
 
 
     </textarea>
