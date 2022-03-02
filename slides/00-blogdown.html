@@ -4,6 +4,7 @@
     <title>Blogdown &gt; GitHub Pages</title>
     <meta charset="utf-8" />
     <meta name="author" content="Heidi Steiner" />
+    <meta name="date" content="2022-03-02" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/countdown/countdown.css" rel="stylesheet" />
@@ -82,19 +83,33 @@ background-size: contain
 background-image: url(assets/emi-showcase.gif)
 background-size: cover
 
----
-General idea:  
-
-#### Users already have an existing repo on GitHub and want to add a .RMD hosted Hugo themed website to the directory  
-
 
 ---
-### 1. Update code from GitHub
+class: inverse, middle, center
+
+# ✨ Ready, Set, Goal ✨
+
+## Users already have an existing repo on GitHub and want to add a .RMD hosted Hugo themed website to the directory 
+
+
+---
+class: inverse, middle, center
+# Step 1 
+
+Update materials from GitHub repo
 
 Pull changes, re-download the zip, or create new project on RStudio (or cloud)... does not matter how you get there just that you can! 
 
+Repo: https://github.com/hidyverse/RMD4HS 
+
+and restart RStudio! 
+
+
 ---
-### 2. Create `docs/` and `website/` directories within project root 
+class: inverse, middle, center
+# Step 2 
+
+Create directories within project root 
 
 
 ```r
@@ -103,14 +118,27 @@ dir.create("docs")
 ```
 
 ---
-### 3. Create `.noyekyll` within  `docs/` with `file.create('../docs/.nojekyll')` 
+class: inverse, middle, center
+# Step 3
 
-This will stop GitHub from being confused that we're using Hugo 
+Create `.noyekyll` file within the new `docs/` directory
 
-**HINT**: Use `ls -a docs/` to double check your `.nojekyll` file was made 
+
+
+```r
+file.create('docs/.nojekyll')
+```
+
+
+This will stop GitHub from being confused later that we're using Hugo (GitHub typically expects Jekyll)
+
+**HINT**: Use `ls -a docs/` to double check your `.nojekyll` file was made or turn on `show hidden files` within `more` in the `files` browser in RStudio  
 
 ---
-### 4. Prep GitHub repo for page documents 
+class: inverse, middle
+# Step 4
+
+Prep GitHub repo for Pages documents 
 
 - Go to `Settings` in your github repo 
 - Select `Pages` on the guide on the left of the screen
@@ -118,9 +146,13 @@ This will stop GitHub from being confused that we're using Hugo
 - Change repo from root to `docs/`
 - Save &amp; Refresh
 - Copy the url made for your repo
+Optional: Return to your main repo page and add the new url to the `about` section at the right to make your life easier later
 
 ---
-### 5. Navigate into the `website/` directory
+class: inverse, middle, center
+# Step 5
+
+Navigate into the `website/` directory
 
 
 ```r
@@ -130,30 +162,133 @@ setwd("website/")
 We will be copying the `website/public/` to `docs/` and pushing `docs/` to GitHub when we're ready.  
 
 ---
-### 6. Create a blogdown website! 
+class: inverse, middle, center
+# Step 6
+
+Create a blogdown website! 
 
 
 ```r
+install.packages("blogdown")
 blogdown::new_site()
 ```
 
+**HINT**: Cloud users need to add 
+
+```r
+relativeURLs: true
+```
+to their `config` file prior to viewing a rendered site (**and use the `serve_site()` addin**)! 
+
+
+
 ---
-### 7. Change base url in `config.yaml` to new github pages url 
+background-image: url(assets/hugo/1.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/2.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/3.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/4.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/5.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/6.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/7.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/8.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/9.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/10.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/11.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/12.png)
+background-size: cover
+
+---
+background-image: url(assets/hugo/13.png)
+background-size: cover
+class: inverse, middle, center
+
+# Your home page
+
+---
+class: bottom, center, inverse
+background-image: url(assets/house-number-446044_1920.jpg)
+background-size: cover
+
+# Now let's update our home's address
+
+---
+
+---
+
+## This is a Hugo site
+
+&lt;img src="images/folder-structure.png" width="90%" /&gt;
+
+
+
+
+---
+class: inverse, middle, center
+# Step 7
+
+Change base url in `config.yaml` to new github pages url 
 
 Paste the url in `config.yaml` as the key to the `baseurl` value
 
 ---
-### 8. Add `website/` to `.gitignore` 
+class: inverse, middle, center
+# Step 8
+
+Add `website/` to `.gitignore` 
 
 Create (or add to an existing `.gitignore`) in the root project. Include all the website materials in the `.gitignore` for now. We don't need to have our website creation materials be public, just the final posts.
 
 ---
-### 9. `blogdown::build_site()` prior to pushing to GitHub
+class: inverse, middle, center
+# Step 9
+
+prior to pushing to GitHub you'll need to build your site
+
+```r
+`blogdown::build_site()`
+```
+
 
 Building the site will create a `public/` directory within `website/` which we want to copy to `root_project/docs/` to push to GitHub. 
 
 ---
-### 10. Copy contents of new `public/` folder to `../docs/` 
+class: inverse, middle, center
+# Step 10
+
+Copy contents of new `public/` folder to `../docs/` 
 
 This is a manual process so I doubt this is the most efficient way, but this works! 
 
@@ -165,7 +300,10 @@ cp -r website/public/* docs/
 **NOTE**: I used the terminal for this! 
 
 ---
-### 11. Push to existing GitHub repo (or some other upload)
+class: inverse, middle, center
+# Step 11
+
+Push to existing GitHub repo (or some other upload)
 
 Does `docs/` show up in your changes? 
 
@@ -178,81 +316,13 @@ git config --global user.name "UserName"
 **NOTE**: I used the terminal for this!   
 
 
----
-
-# This is a Hugo site
-
-&lt;img src="images/folder-structure.png" width="90%" /&gt;
-
----
-
-# This is the content folder
-
-.pull-left[
-&lt;img src="images/content-structure.png" width="90%" /&gt;
-]
-
-.pull-right[
-
-+ Hugo calls these "sections"
-+ Every section has a "page" (usually singular)
-
-]
-
-
----
-
-# This is the home folder
-
-.pull-left[
-In the academic theme, these are *widgets*:
-
-+ Portable! Move the `widget.md` file to any other [page](https://sourcethemes.com/academic/docs/managing-content/#create-a-widget-page)
-+ Configurable! Think: Mr. Potato Head
-
-]
-
-.pull-right[
-
-
-
-]
-
----
-class: inverse, middle, center
-
-# Widgets
-
-![](https://media.giphy.com/media/3orifd2IjZjWVkpC4o/giphy.gif)
-
----
-class: inverse, middle, center
-
-# Edit your home page
-
-Pick your widgets- I suggest leaving them all in place but setting `active = FALSE` to remove any.
-
-
-If you delete, they are always in: `themes/hugo-academic/exampleSite/content/home`
-
-<div class="countdown" id="timer_621fad15" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-
-
-Bonus: move a widget to another [page](https://sourcethemes.com/academic/docs/managing-content/#create-a-widget-page). You could, for example, have the `about.md` widget be the **only** active widget on the home page.
-
-# Go Deeper
-
-Read more of the [docs](https://sourcethemes.com/academic/docs/page-builder/#personalizing-widgets) for personalizing widgets.
-
 
 ---
 class: inverse, middle, center
 
 # ✨ Quiz! ✨
 
-<div class="countdown" id="timer_621faec6" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<div class="countdown" id="timer_621fcb1c" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">02</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -267,18 +337,22 @@ class: inverse, middle, center
 
 # ✨ Trick question ✨
 
-<div class="countdown" id="timer_621fab66" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
+<div class="countdown" id="timer_621fcacc" style="right:0;bottom:0;" data-audio="true" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">15</span></code>
 </div>
 
 Should you ever edit files in the `public/` directory?
 
+
 ---
-### Extra Time. Download new theme and update as desired! 
+class: inverse, middle, center
+# Your turn 
 
-[A complete list of Hugo themes](https://themes.gohugo.io/)  
-[More common (aka more likely to work) Hugo themes via Wowchemy](https://wowchemy.com/hugo-themes/)
-
+- Download new theme and update as desired! 
+  - [A complete list of Hugo themes](https://themes.gohugo.io/)  
+  - [More common (aka more likely to work) Hugo themes via    Wowchemy](https://wowchemy.com/hugo-themes/)
+- Update content! 
+- Familiarize yourself with `config` files
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
