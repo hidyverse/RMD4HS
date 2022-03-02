@@ -105,19 +105,13 @@ class: inverse, middle, center
 class: inverse
 # Step 1 
 
-Update materials from GitHub repo
-
-Pull changes, re-download the zip, or create new project on RStudio (or cloud)...  
-Does not matter how you get there just that you can! 
+- Fork 
 
 ```{r eval=F}
 https://github.com/hidyverse/RMD4HS 
 ```
 
-
-
-and restart RStudio! 
-
+- Clone with RStudio `New Project` from version control 
 
 ---
 class: inverse
