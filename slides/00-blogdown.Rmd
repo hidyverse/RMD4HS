@@ -50,7 +50,6 @@ class: inverse, middle, center
 
 An <i class="fab fa-r-project"></i> package...
 
---
 
 that lets you create websites in 
 
@@ -99,24 +98,29 @@ class: inverse, middle, center
 
 # `r emo::ji("sparkles")` Ready, Set, Goal `r emo::ji("sparkles")`
 
-## Users already have an existing repo on GitHub and want to add a .RMD hosted Hugo themed website to the directory 
+## Users already have an existing repo on GitHub and want to add a .Rmd hosted Hugo themed website to the directory 
 
 
 ---
-class: inverse, middle, center
+class: inverse, middle
 # Step 1 
 
 Update materials from GitHub repo
 
-Pull changes, re-download the zip, or create new project on RStudio (or cloud)... does not matter how you get there just that you can! 
+Pull changes, re-download the zip, or create new project on RStudio (or cloud)...  
+Does not matter how you get there just that you can! 
 
-Repo: https://github.com/hidyverse/RMD4HS 
+```{r eval=F}
+https://github.com/hidyverse/RMD4HS 
+```
+
+
 
 and restart RStudio! 
 
 
 ---
-class: inverse, middle, center
+class: inverse, middle
 # Step 2 
 
 Create directories within project root 
@@ -127,7 +131,7 @@ dir.create("docs")
 ```
 
 ---
-class: inverse, middle, center
+class: inverse, middle
 # Step 3
 
 Create `.noyekyll` file within the new `docs/` directory
@@ -140,7 +144,11 @@ file.create('docs/.nojekyll')
 
 This will stop GitHub from being confused later that we're using Hugo (GitHub typically expects Jekyll)
 
-**HINT**: Use `ls -a docs/` to double check your `.nojekyll` file was made or turn on `show hidden files` within `more` in the `files` browser in RStudio  
+```{r eval=F}
+ls -a doc/
+```
+
+**HINT**: Use above to double check your `.nojekyll` file was made or turn on `show hidden files` within `more` in the `files` browser in RStudio  
 
 ---
 class: inverse, middle
@@ -157,7 +165,7 @@ Prep GitHub repo for Pages documents
 Optional: Return to your main repo page and add the new url to the `about` section at the right to make your life easier later
 
 ---
-class: inverse, middle, center
+class: inverse, middle
 # Step 5
 
 Navigate into the `website/` directory
@@ -169,7 +177,7 @@ setwd("website/")
 We will be copying the `website/public/` to `docs/` and pushing `docs/` to GitHub when we're ready.  
 
 ---
-class: inverse, middle, center
+class: inverse, middle
 # Step 6
 
 Create a blogdown website! 
@@ -179,13 +187,48 @@ install.packages("blogdown")
 blogdown::new_site()
 ```
 
-**HINT**: Cloud users need to add 
+**HINT**: Cloud users need to say no to rendering the site and add 
 ```{r eval = F}
 relativeURLs: true
 ```
 to their `config` file prior to viewing a rendered site (**and use the `serve_site()` addin**)! 
 
+---
 
+## This is a Hugo site
+
+```{r out.width="90%", echo = FALSE}
+knitr::include_graphics("images/folder-structure.png")
+```
+
+
+---
+class: inverse, middle
+# Step 7
+
+Change base url in `config.yaml` to new github pages url 
+
+Paste the url in `config.yaml` as the key to the `baseurl` value
+
+---
+class: inverse, middle
+# Step 8
+
+Add `website/` to `.gitignore` 
+
+Create (or add to an existing `.gitignore`) in the root project. Include all the website materials in the `.gitignore` for now. We don't need to have our website creation materials be public, just the final posts.
+
+---
+class: inverse, middle
+# Step 9
+
+prior to pushing to GitHub you'll need to build your site
+```{r eval= F}
+`blogdown::build_site()`
+```
+
+
+Building the site will fill out the `public/` directory with files from your content within `website/` which we want to copy to `root_project/docs/` to push to GitHub. 
 
 ---
 background-image: url(assets/hugo/1.png)
@@ -235,63 +278,9 @@ background-size: cover
 background-image: url(assets/hugo/12.png)
 background-size: cover
 
----
-background-image: url(assets/hugo/13.png)
-background-size: cover
-class: inverse, middle, center
-
-# Your home page
 
 ---
-class: bottom, center, inverse
-background-image: url(assets/house-number-446044_1920.jpg)
-background-size: cover
-
-# Now let's update our home's address
-
----
-
----
-
-## This is a Hugo site
-
-```{r out.width="90%", echo = FALSE}
-knitr::include_graphics("images/folder-structure.png")
-```
-
-
-
-
----
-class: inverse, middle, center
-# Step 7
-
-Change base url in `config.yaml` to new github pages url 
-
-Paste the url in `config.yaml` as the key to the `baseurl` value
-
----
-class: inverse, middle, center
-# Step 8
-
-Add `website/` to `.gitignore` 
-
-Create (or add to an existing `.gitignore`) in the root project. Include all the website materials in the `.gitignore` for now. We don't need to have our website creation materials be public, just the final posts.
-
----
-class: inverse, middle, center
-# Step 9
-
-prior to pushing to GitHub you'll need to build your site
-```{r eval= F}
-`blogdown::build_site()`
-```
-
-
-Building the site will create a `public/` directory within `website/` which we want to copy to `root_project/docs/` to push to GitHub. 
-
----
-class: inverse, middle, center
+class: inverse, middle
 # Step 10
 
 Copy contents of new `public/` folder to `../docs/` 
@@ -305,7 +294,7 @@ cp -r website/public/* docs/
 **NOTE**: I used the terminal for this! 
 
 ---
-class: inverse, middle, center
+class: inverse, middle
 # Step 11
 
 Push to existing GitHub repo (or some other upload)
@@ -347,14 +336,47 @@ countdown(minutes = 0, seconds = 15, play_sound = TRUE)
 
 Should you ever edit files in the `public/` directory?
 
+---
+
+# Hugo help
+
+Self learning from a much better teacher than myself: Alison Hill 
+https://www.apreshill.com/blog/spoonful-hugo/ 
+
+```{r echo = F}
+knitr::include_graphics("images/spoonful-hugo.png")
+```
+
 
 ---
-class: inverse, middle, center
+
+# What to touch
+
+Green means go!
+
+.pull-left[
+
+```{r echo =F}
+knitr::include_graphics("images/what-to-touch.png")
+```
+]
+
+.pull-right[
+All of your `themes` folder can be overriden by files in your project root: [read more here](https://zwbetz.com/override-a-hugo-theme/)
+
+]
+
+---
+class: inverse, middle
 # Your turn 
 
 - Download new theme and update as desired! 
   - [A complete list of Hugo themes](https://themes.gohugo.io/)  
   - [More common (aka more likely to work) Hugo themes via    Wowchemy](https://wowchemy.com/hugo-themes/)
-- Update content! 
+- Update your content! 
+  - Check out the [wowchemy docs](https://wowchemy.com/docs/getting-started/customization/) for non-programmer instructions
 - Familiarize yourself with `config` files
+  - The [blogdown](https://bookdown.org/yihui/blogdown/configuration.html) book is a great place to start! 
+  
+  
 
