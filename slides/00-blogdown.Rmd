@@ -94,7 +94,91 @@ background-image: url(assets/emi-showcase.gif)
 background-size: cover
 
 
-##### NEED TO ADD STEPS HERE 
+General idea:  
+
+#### Users already have an existing repo on GitHub and want to add a .RMD hosted Hugo themed website to the directory  
+
+
+
+### 1. Update code from GitHub
+
+Pull changes, re-download the zip, or create new project on RStudio (or cloud)... does not matter how you get there just that you can! 
+
+### 2. Create `docs/` and `website/` directories within project root 
+
+```{r}
+dir.create("website")
+dir.create("docs")
+```
+
+### 3. Create `.noyekyll` within  `docs/` with `file.create('../docs/.nojekyll')` 
+
+This will stop GitHub from being confused that we're using Hugo 
+
+**HINT**: Use `ls -a docs/` to double check your `.nojekyll` file was made 
+
+### 4. Prep GitHub repo for page documents 
+
+- Go to `Settings` in your github repo 
+- Select `Pages` on the guide on the left of the screen
+- Change `Branch` from none to `main` (or `master`) 
+- Change repo from root to `docs/`
+- Save & Refresh
+- Copy the url made for your repo
+
+### 5. Navigate into the `website/` directory
+
+```{r}
+setwd("website/")
+```
+
+We will be copying the `website/public/` to `docs/` and pushing `docs/` to GitHub when we're ready.  
+
+### 6. Create a blogdown website! 
+
+```{r}
+blogdown::new_site()
+```
+
+### 7. Change base url in `config.yaml` to new github pages url 
+
+Paste the url in `config.yaml` as the key to the `baseurl` value
+
+### 8. Add `website/` to `.gitignore` 
+
+Create (or add to an existing `.gitignore`) in the root project. Include all the website materials in the `.gitignore` for now. We don't need to have our website creation materials be public, just the final posts.
+
+
+### 9. `blogdown::build_site()` prior to pushing to GitHub
+
+Building the site will create a `public/` directory within `website/` which we want to copy to `root_project/docs/` to push to GitHub. 
+
+### 10. Copy contents of new `public/` folder to `../docs/` 
+
+This is a manual process so I doubt this is the most efficient way, but this works! 
+
+
+```{bash}
+cp -r website/public/* docs/
+```
+**NOTE**: I used the terminal for this! 
+
+### 11. Push to existing GitHub repo (or some other upload)
+
+Does `docs/` show up in your changes? 
+
+**HINT**: If you're on the cloud, you need to first tell Git who you are! Try:
+```{bash}
+git config --global user.email "you@example.com"
+```
+
+
+### Extra Time. Download new theme and update as desired! 
+
+[A complete list of Hugo themes](https://themes.gohugo.io/)  
+[More common (aka more likely to work) Hugo themes via Wowchemy](https://wowchemy.com/hugo-themes/)
+
+
 
 ---
 
