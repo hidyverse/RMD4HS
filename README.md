@@ -1,5 +1,3 @@
-start with downloading the whole repo with the green `code` button (even if you're using RStudio Cloud, also download the repo locally so you can get a copy of the slides - you will not need RStudio locally to view the slide deck) 
+The slides can be viewed by downloading the entire `slides/` directory and opening `00-*.html` files
 
-we'll use the `example/` directory during the workshop
-
-navitgate to the `slides/` directory from your file explorer (likely in `Downloads`) and open `00-rmd.html` to view the slies
+The tutorials can be found in `example/`! `*-AnswerKey.Rmd` files are post-class versions of their respective documents. 
