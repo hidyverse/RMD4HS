@@ -20,6 +20,8 @@ ggplot2::theme_set(ggplot2::theme_minimal())
 
 ## Lung Data 
 
+
+
 The lung data set is found in the [`survival`](https://github.com/therneau/survival) R package. Try to load the lung data set in R by issuing the following command at the console `lung`. See the **data dictionary** below: 
 
 
@@ -37,7 +39,7 @@ The lung data set is found in the [`survival`](https://github.com/therneau/survi
 |wt.loss|	Weight loss in last six months|
 
 ```{r echo = FALSE, message=FALSE}
-mockdata = read_csv("2022-01-01_lungdat.csv") %>%  ## read in your data with read_csv
+mockdata = read_csv("2022-02-22_lungdat.csv") %>%  ## read in your data with read_csv
   mutate_at(.vars = c("inst", "status", "sex", "ph.ecog"),.funs = as.factor) 
 ```
 
@@ -49,6 +51,8 @@ Many packages, such as [`dplyr`](https://dplyr.tidyverse.org/) facilitate the ea
 mockdata %>% 
   glimpse()
 ```
+
+`glimpse()` shows us the dimensions of our dataframe and then the first 19 observations of each column (and the column type (i.e. 'fct' for factor)). 
 
 
 ## Communicate Results Reproducibly

@@ -1,0 +1,176 @@
+---
+title: "RMD Teacher Notes"
+author: "Heidi E. Steiner"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown (RMD) for Reproducible Reports
+
+Introduce self: 
+Heidi 
+Data Science Institute
+PGx
+R
+
+Introduce sticky system:
+mention zoom yes/no checks
+
+Workshop Materials: 
+navigate to the [github content](https://github.com/hidyverse/RMD4HS) at this time the only thing the attendees need is the content of the `example/` directory, however, it may be easiest to just use the green "code" button to download the whole repo. 
+Perhaps mention the repo will need to be cloned anyway to view the slides in the future 
+
+RStudio intro: 
+navigate to any RStudio (with default windows!) and show how to file > new file > R Markdown but that we'll be working with the RMDs in the example/ directory just downloaded. 
+
+### What is RMD
+
+
+### How does RMD work 
+
+just as in #3
+
+### Change mental model 
+
+the idea here is that like word, the doll on the left's "source" always matches the "output" but the doll on the right can change their output with the same source 
+
+different outfits = different occasions example: same source could make a html, a word doc, and a shiny dashboard
+
+a more advanced example: you can use global options to have one document that is only plots and tables for your collaborator and then the SAME source can output a document that is all the code for those plots and tables for a code review
+
+### First look 
+
+Click on the timer to start it. 
+1. is the YAML header
+2. all the markdown
+3. anything in ```{x} ``` chunks 
+4. the output is the knitted html document...it should knit to a new window
+Challenge: the global chunk options are defined in the "setup" chunk at the top of an RMD doc
+
+The doc just comes alive when you press knit! so let's walk through each of these items to better understand
+
+SHOW CHANGING KNIT TO VIEWER!!! 
+
+### metadata: YAML 
+
+"yet another markdown language" 
+will always be in a "key: value" format with EXACTLY one space between the colon and value 
+
+YAML *orchestrates* your document
+
+### save output options in YAML
+
+here on top we see the use of the "key: value" format where "output" is the key and "html_document" is the value
+
+at the bottom we then see "html_document" being used as the **key** as further options are added to the html document output. we're adding a table of contents here with the value "true"
+
+### Your turn: Edit YAML
+
+read the instructions out loud to help users navigate to their console to run `?html_document` to demonstrate what I'm looking for in this activity
+
+answers are on the next slide...
+
+1. add floating toc with `toc_float: true` beneath `toc: true` in the YAML
+2. Pandoc's built-in styles include "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock" and "breezedark" ... although I'm pretty sure any [bootswatch3](https://bootswatch.com/3/) theme will work! Try them out! Use `theme: flatly` 
+3. The "kable" method uses the knitr::kable function to print data frames. use `df_rint: kable` 
+CHALLENGE: you can embed a link in the html page that to download the code in the RMD with `code_download: true`
+
+### What's hard about YAML? 
+
+likely will need to get comfy with different options for each relevant format
+
+### Markdown 
+
+I just included a quiz here and a link to a tutorial...markup languages are very common so encourage learning about them but not in this workshop
+
+I use zoom polls here for the quiz. Not entirely necessary. 
+Bulleted lists are added w/ `-` 
+Numbered lists can be started w/ `1.` (list additional items with more 1's!)
+
+### R Code
+
+These next sections demonstrate the difference between printing to the console or saving to the environment 
+
+### Add chunks 
+
+make sure you show how to run the chunks in rstudio
+
+### output 
+
+### chunk options 
+
+now that we know what the R Code options are, we can also customize chunk options within the curly brackets
+
+echo turns off the R code and only prints results
+eval turns off the R engine, removing output entirely 
+include removes code and output from report
+echo = T, result = 'hide' is different from eval = F because it does evaluate the chunk but it still hides the output 
+this also demonstrates multiple options 
+
+### use other code engines
+
+mention here that the **code engine** can be changed! 
+
+### default options
+
+just showing learners that they can call the code to see other knitr options within R
+
+### chunk labels
+
+for some pandoc related reason "_" doesn't work well in chunks so avoid underscores or spaces but otherwise labels are a go! 
+
+label your chunks for further metadata interactions like saving all created figures by the name given in the chunk!
+
+tbh I'm not here yet, I only name my setup chunk and I do find that to be helpful
+
+### setup chunk
+
+"setup" (must be called "setup") chunk sets **global** options for the whole document (which may have been explored in the "first look" activity) 
+
+### Your turn: data dump 
+
+the point of this activity is to demonstrate the ease of incorporating updated data. often in clinical research we start analyses half way and will need to repeat processes when final cohorts have been accrued. 
+
+folks may try to output to a new document format this time, I've suggested word as the PDF output option will require additional downloads (and may break some of the YAML)
+
+### output formats
+
+pointing to a resource that lists the numerous output formats that rmarkdown renders 
+
+### extensions
+
+This whole section is just about what you can do with your RMD skills....
+
+- write a book 
+- write a multi-page html document
+- create a scientific poster
+- write a blog
+- write (and then start to automate) your CV (and then host it on your blog!)
+
+### more 
+
+redoc and officedown are packages to help with rmd <--> word.doc
+spelling checks spelling
+word counting
+help to write a package 
+
+
+### take-aways
+
+maybe things you've said throughout this lecture 
+or perhaps just good tips to remember
+
+### and last tips
+
+### lecture done
+
+Then I'm hoping the learners will take the rest of the time to open, knit, read and then edit 02-explore.Rmd
+
+There are "your turn" activities at the bottom of the document 
+the answer key wasn't added to the github so email heidiesteiner@arizona.edu if you require this doc 
+
+

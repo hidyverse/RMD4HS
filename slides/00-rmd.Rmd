@@ -8,6 +8,7 @@ output:
     css: ["default", "assets/css/my-theme.css", "assets/css/my-fonts.css"]
     seal: false 
     lib_dir: libs
+    self_contained: true
     nature:
       highlightStyle: dracula
       highlightLanguage: ["r", "yaml", "markdown"]
@@ -52,14 +53,13 @@ mockdata = lung %>%
 
 class: title-slide, center, bottom
 
-
 ## `r rmarkdown::metadata$title`
-### `r rmarkdown::metadata$subtitle`
-
+  
+.pull-left[
 #### `r rmarkdown::metadata$author` &#183; Data Science Institute
 
-###### All content is [RStudio Education](https://github.com/rstudio-education/rmd4medicine), CC-BY. All art (unless otherwise noted) is by [Desirée De Leon](https://desiree.rbind.io/), CC-BY-NC-ND.
-
+######  All content is [RStudio Education](https://github.com/rstudio-education/rmd4medicine), CC-BY. All art (unless otherwise noted) is by [Desirée De Leon](https://desiree.rbind.io/) and [Allison Horst](https://www.allisonhorst.com/), CC-BY-NC-ND.
+]
 
 
 
@@ -106,20 +106,11 @@ class: title-slide, center, bottom
 ```
 
 ---
-class: top
-
-.left-column[
-<span class="fa-stack fa-4x">
-  <i class="fa fa-circle fa-stack-2x" style="color: #2f5275;"></i>
-  <strong class="fa-stack-1x" style="color: #fff;">?</strong>
-</span> 
-
-]
-
-
-.right-column[
+background-image: url(images/rmd_flowchart.png)
 
 # How *does* R Markdown work?
+
+???
 
 1. `r emo::ji("shrug")` (`r emo::ji("heavy_check_mark")`)
 
@@ -127,14 +118,14 @@ class: top
 
 1. `knitr` executes the code and converts `.Rmd` to `.md`; **Pandoc** renders the `.md` file to the output format you want. (`r emo::ji("heavy_check_mark")`)
 
-]
+
 
 ---
 class: middle, center
 
 # Change your mental model
 
-.pull-left[
+.pull-left1[
 
 ### Source &harr; output
 
@@ -144,7 +135,7 @@ knitr::include_graphics("images/word.png")
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ### Source &rarr; output
 
@@ -159,7 +150,7 @@ class: middle, center
 
 # Change your mental model
 
-.pull-left[
+.pull-left1[
 
 ### Source &harr; output
 
@@ -169,7 +160,7 @@ knitr::include_graphics("images/haba-elise.jpg")
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ### Source &rarr; output
 
@@ -226,7 +217,7 @@ countdown(minutes = 2)
 ---
 class: center, middle
 
-```{r do-live, echo=FALSE, out.width="50%"}
+```{r do-live, echo=FALSE, out.width="90%"}
 knitr::include_graphics("images/doc-live.jpg")
 ```
 
@@ -247,7 +238,7 @@ class: middle, center, inverse
 
 # metadata: YAML
 
-.pull-left[
+.pull-left1[
 
 _"YAML Ain't Markup Language"_
 
@@ -260,7 +251,7 @@ key: value
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r echo=FALSE, out.width="75%", fig.align='center'}
 knitr::include_graphics("images/orchestra.jpg")
@@ -273,7 +264,7 @@ knitr::include_graphics("images/orchestra.jpg")
 
 # Save output options in your YAML
 
-.pull-left[
+.pull-left1[
 
 ```{r echo = FALSE}
 yml_empty() %>% 
@@ -290,7 +281,7 @@ yml_empty() %>%
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r echo=FALSE, out.width="75%", fig.align='center'}
 knitr::include_graphics("images/orchestra.jpg")
@@ -305,7 +296,7 @@ class: your-turn
 
 ## Edit your YAML
 
-Use `?html_document` from your R console to:
+Use **`?html_document`** from your R console to:
 
 1. Add a floating table of contents
 
@@ -341,7 +332,7 @@ yml_empty() %>%
 
 # What is hard about YAML?
 
-.pull-left[
+.pull-left1[
 + Indentations matter
 
 + Rarely informative error messages
@@ -369,9 +360,11 @@ class: middle
 
 # Pop quiz
 
-.pull-left[
+--
 
-How do you add lists? Bulleted? Numbered?
+.pull-left1[
+
+How do you add lists in Markdown? Bulleted? Numbered?
 
 `! Item 1`
 
@@ -381,6 +374,16 @@ How do you add lists? Bulleted? Numbered?
 
 `1. Item 1`
 
+]
+
+--
+
+.pull-right1[
+
+```{r echo=FALSE, out.width="95%", fig.align='left'}
+knitr::include_graphics("images/markdown.png")
+```
+https://commonmark.org/help/tutorial/
 ]
 
 ---
@@ -397,7 +400,7 @@ class: inverse, center, middle
 
 # Code chunks
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r}`r ''`
@@ -412,7 +415,7 @@ What is the fate of this chunk?
 
 --
 
-.pull-right[
+.pull-right1[
 
 ```{r}
 mockdata %>% 
@@ -425,7 +428,7 @@ mockdata %>%
 
 # Code chunks
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r}`r ''`
@@ -439,7 +442,7 @@ What fate do you predict here?
 
 --
 
-.pull-right[
+.pull-right1[
 
 ```{r}
 n_sites <- n_distinct(mockdata$inst)
@@ -452,7 +455,7 @@ n_sites <- n_distinct(mockdata$inst)
 
 # Code chunks
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r}`r ''`
@@ -465,7 +468,7 @@ n_sites
 
 --
 
-.pull-right[
+.pull-right1[
 
 ```{r}
 n_sites <- n_distinct(mockdata$inst)
@@ -479,7 +482,7 @@ n_sites
 
 # Code chunks
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r}`r ''`
@@ -495,7 +498,7 @@ What about this one?
 
 --
 
-.pull-right[
+.pull-right1[
 
 ```{r fig.retina=3, out.width="70%", fig.align='center'}
 ggplot(mockdata, aes(x = status, 
@@ -525,16 +528,6 @@ interactively (show button)
 whole doc (knit button or run all chunks)
 
 
----
-class: center
-background-image: url(https://pbs.twimg.com/media/EXm5IN8UwAADiRQ?format=jpg&name=4096x4096)
-background-size: cover
-
-.pull-right[
-
-# Use other code engines! 
-
-]
 
 ---
 class: inverse, center, middle
@@ -550,7 +543,7 @@ class: inverse, center, middle
 
 # Chunk options
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r}`r ''`
@@ -560,7 +553,7 @@ glimpse(mockdata)
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r}
 glimpse(mockdata)
@@ -572,7 +565,7 @@ glimpse(mockdata)
 
 # echo
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r echo=FALSE}`r ''`
@@ -582,7 +575,7 @@ glimpse(mockdata)
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r echo=FALSE}
 glimpse(mockdata)
@@ -594,7 +587,7 @@ glimpse(mockdata)
 
 # eval
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r eval=FALSE}`r ''`
@@ -604,7 +597,7 @@ glimpse(mockdata)
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r eval=FALSE}
 glimpse(mockdata)
@@ -616,7 +609,7 @@ glimpse(mockdata)
 
 # include
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r include=FALSE}`r ''`
@@ -626,7 +619,7 @@ glimpse(mockdata)
 
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r include=FALSE}
 glimpse(mockdata)
@@ -638,17 +631,21 @@ glimpse(mockdata)
 
 # Chunk options
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r echo=TRUE, results='hide'}`r ''`
 glimpse(mockdata)
 ```
 ````
++ Place between curly braces<br>`{r option=value}`
 
++ Multiple options separated by commas<br>`{r option1=value, option2=value}`
+
++ Careful! The `r` part is the **code engine** (other engines possible)
 ]
 
-.pull-right[
+.pull-right1[
 
 ```{r echo=TRUE, results='hide'}
 glimpse(mockdata)
@@ -656,11 +653,18 @@ glimpse(mockdata)
 
 ]
 
-+ Place between curly braces<br>`{r option=value}`
 
-+ Multiple options separated by commas<br>`{r option1=value, option2=value}`
 
-+ Careful! The `r` part is the **code engine** (other engines possible)
+---
+class: center
+background-image: url(https://pbs.twimg.com/media/EXm5IN8UwAADiRQ?format=jpg&name=4096x4096)
+background-size: cover
+
+.pull-right1[
+
+### Use other code engines! 
+
+]
 
 ---
 
@@ -669,7 +673,7 @@ glimpse(mockdata)
 ]
 
 .right-column[
-```{r}
+```{r out.width="90%"}
 str(knitr::opts_chunk$get())
 ```
 
@@ -679,23 +683,22 @@ str(knitr::opts_chunk$get())
 
 # Chunk labels
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r peek, echo=FALSE, results='hide'}`r ''`
 glimpse(mockdata)
 ```
 ````
-
-]
-
-.pull-right[
-
 + Place between curly braces<br>`{r label}`
 
 + Separated options with commas<br>`{r label, option1=value}`
 
 + Careful! No duplicate chunk labels
+
+]
+
+.pull-right1[
 
     ````
     ```{r peek}`r ''`
@@ -746,12 +749,22 @@ everything else!
 ]
 
 ---
+background-image: url(images/pour.jpeg)
+background-position: left
+background-size: contain
+class: middle, center
+
+.pull-right[
+![](images/figs-label.png)
+]
+
+---
 
 # The setup chunk
 
 
 
-.pull-left[
+.pull-left1[
 
 ````
 ```{r setup, include=FALSE}`r ''`
@@ -765,7 +778,7 @@ knitr::opts_chunk$set(
 
 ]
 
-.pull-right[
+.pull-right1[
 
 + A special chunk label: `setup`
 
@@ -826,7 +839,7 @@ background-size: 10%
 background-position: 42% 2%
 
 ## Bookdown
-.pull-left[
+.pull-left1[
 While writing single reports is quite common, so is also writing book-style reports.  
 Book-style reports include chapters, table of contents, appendices etc.    
 These are not arbitrary to compile and set up.
@@ -837,7 +850,7 @@ Create lovely books in html, pdf, or even e-book format!
 - Yihui Xie's - [Bookdown book on bookdown](https://bookdown.org/yihui/bookdown/)  
 ]
 
-.pull-right[
+.pull-right1[
 ```{r, echo = FALSE, out.width='100%'}
 knitr::include_graphics("images/bookdown_ex.png")
 ```
@@ -851,7 +864,7 @@ background-position: 42% 2%
 
 ## Pagedown
 
-.pull-left[
+.pull-left1[
 html documents usually are a single page, that can be scrolled for ever and ever an ever.  
 Some times, you'd like to have pages also in html, without needing to do pdf or create an  
 entire bookdown book.
@@ -863,7 +876,7 @@ Pagedown also has templates for html resumes, business cards and more!
 - Yihui Xie's - [Paginated html report of paginated html reports](https://pagedown.rbind.io/)  
 ]
 
-.pull-right[
+.pull-right1[
 ```{r, echo = FALSE, out.height='100%'}
 knitr::include_graphics("images/pagedown_ex.png")
 ```
@@ -876,7 +889,7 @@ background-position: 42% 2%
 
 
 ## Posterdown
-.pull-left[
+.pull-left1[
 Posterdown is great for making... posters!
 The package is very simple to use if you know rmarkdown already,
 and has some nice tempaltes to build on. 
@@ -885,7 +898,7 @@ and has some nice tempaltes to build on.
 
 ]
 
-.pull-right[
+.pull-right1[
 ```{r, echo = FALSE, out.width='100%'}
 knitr::include_graphics("images/poster_ex.png")
 ```
@@ -899,7 +912,7 @@ background-position: 42% 2%
 
 ## Blogdown
 
-.pull-left[
+.pull-left1[
 
 Blogging can be a fun way to disseminate research, data and coding.  
 It's a great way to show-case your skills and tell others about the cool things you are learning and figuring out.
@@ -908,7 +921,7 @@ It's a great way to show-case your skills and tell others about the cool things 
 
 ]
 
-.pull-right[
+.pull-right1[
 ```{r, echo = FALSE, out.width='100%'}
 knitr::include_graphics("images/blogdown_ex.png")
 ```
@@ -920,7 +933,7 @@ background-size: 10%
 background-position: 42% 2%
 
 ## Vitae
-.pull-left[
+.pull-left1[
 
 Resume's are important, updating them also important but at times tedious.
 And finding nice templates for resumes is not easy.
@@ -930,7 +943,7 @@ Vitae is a great package to migrate your resume to Rmarkdown and create truly st
 - Mitchell O'Hara-Wild's - [Vitae package for resumes](https://pkg.mitchelloharawild.com/vitae/)  
 ]
 
-.pull-right[
+.pull-right1[
 ```{r, echo = FALSE, out.width='100%'}
 knitr::include_graphics("https://pbs.twimg.com/media/Dsqo7mdU0AALGEe?format=jpg&name=medium")
 ```

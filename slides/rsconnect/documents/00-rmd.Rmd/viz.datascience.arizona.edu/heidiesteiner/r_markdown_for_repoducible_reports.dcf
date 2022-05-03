@@ -1,0 +1,13 @@
+name: r_markdown_for_repoducible_reports
+title: R Markdown for Repoducible Reports
+username: heidiesteiner
+account: heidiesteiner
+server: viz.datascience.arizona.edu
+hostUrl: https://viz.datascience.arizona.edu/__api__
+appId: 56
+bundleId: 271
+url: https://viz.datascience.arizona.edu:443/content/add94aea-3608-46b7-80c7-0844302e8904/
+when: 1650592024.02312
+lastSyncTime: 1650592024.02313
+asMultiple: FALSE
+asStatic: TRUE

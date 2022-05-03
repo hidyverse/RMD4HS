@@ -90,14 +90,26 @@ a:hover, a:active, a:focus {
   float: right;
   padding-top: 1em;
 }
+
 .pull-left {
   float: left;
-  width: 47%;
+  width: 67%;
+  margin-left: -100px;
 }
 .pull-right {
   float: right;
+  width: 32%;
+}
+
+.pull-left1 {
+  float: left;
   width: 47%;
 }
+.pull-right1 {
+  float: right;
+  width: 47%;
+}
+
 .pull-right ~ * {
   clear: both;
 }
@@ -125,16 +137,16 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
 }
 
 .title-slide {
-  background-image: url(../../images/reproducibility_court.png);
+  background-image: url(../../images/projs.png);
   background-position: top;
-  background-size: 50%;
+  background-size: 80%;
   background-color: 'white';
 }
 
 
 .title-slide h1 {
   font-family: 'Prata', serif;
-  color: 'black';
+  color: #0C234B;
   font-size: 3em;
   padding-top: 2em;
   line-height: 1em;
@@ -145,12 +157,12 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
 .title-slide h2 {
   font-family: 'Muli', sans-serif;
   font-weight: 700;
-  font-size: 1.6em;
-  color: 'black';
+  font-size: 4.5em;
+  color: #0C234B;
   text-shadow: none;
-  padding-top: .1em;
-  margin-top: 0px;
-  margin-bottom: 50px;
+  padding-top: .2em;
+  margin-top: 350px;
+  margin-bottom: 0px;
 }
 
 .title-slide h3 {
@@ -167,9 +179,22 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
   font-family: 'Muli', sans-serif;
   font-weight: 400;
   font-size: 1.4em;
-  color: 'black';
+  color: #0C234B;
   margin-top: 0px;
+  margin-bottom: 10px;
+  text-align: justify;
+  margin-left: 30px;
+}
+
+.title-slide h6 {
+  font-family: 'Muli', sans-serif;
+  font-weight: 200;
+  font-size: .5em;
+  margin-top: -10px;
   margin-bottom: 0px;
+  color: #0C234B;
+  text-align: justify;
+  margin-left: 30px;
 }
 
 .title-slide a {
