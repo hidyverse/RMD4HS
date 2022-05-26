@@ -2,4 +2,3 @@ The slides can be viewed by downloading the entire `slides/` directory and openi
 
 The tutorials can be found in `example/`! `*-AnswerKey.Rmd` files are post-class versions of their respective documents. 
 
-Make changes
